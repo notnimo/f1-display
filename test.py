@@ -1,19 +1,22 @@
-
-import requests
+import http.client
 import os                                                                                                                                                                                                          
 from dotenv import load_dotenv, find_dotenv
 from pathlib import Path
 
 load_dotenv(Path(".env"))
 api_token: str = str(os.getenv("API_TOKEN"))
-url = "https://v1.formula-1.api-sports.io/competitions"
+baseURL: str = "v1.formula-1.api-sports.io"
 
-payload={}
+conn = http.client.HTTPSConnection(baseURL)
+
 headers = {
-  'x-apisports-key': api_token,
-}
+    'x-apisports-key': api_token
+    }
 
-response = requests.request("GET", url, headers=headers, data=payload)
+conn.request("GET", "/drivers?search=lewi", headers=headers)
+
+res = conn.getresponse()
+data = res.read()
 
 with open('test.json', 'w') as f:
-  f.write(response.text)
+   f.write(data.decode("utf-8"))
