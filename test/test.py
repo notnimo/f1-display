@@ -1,20 +1,10 @@
-import http.client
-import os                                                                                                                                                                                                          
-from dotenv import load_dotenv, find_dotenv
-from pathlib import Path
+import sys
 
-load_dotenv(Path("../.env"))
-api_token: str = str(os.getenv("API_TOKEN"))
-baseURL: str = "v1.formula-1.api-sports.io"
+def foo(**kwargs):
+  print(kwargs)
+  print(type(kwargs))
 
-conn: http.client.HTTPSConnection = http.client.HTTPSConnection(baseURL)
-
-headers = { 'x-apisports-key': api_token }
-
-conn.request("GET", "/races?competition=1&season=2022", headers=headers)
-
-res = conn.getresponse()
-data = res.read()
-
-with open('test.json', 'w') as f:
-   f.write(data.decode("utf-8"))
+if __name__ == "__main__":
+  sys.argv.append("test")
+  print(sys.argv)
+  foo(a=1, b=2)
