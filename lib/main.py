@@ -1,15 +1,26 @@
-import http.client
-import os                                                                                                                                                                                                          
-from dotenv import load_dotenv, find_dotenv
-from pathlib import Path
+import sys
+
+def main(year, session):
+  pass
 
 if __name__ == "__main__":
-  load_dotenv(Path("../.env"))
-  api_token: str = str(os.getenv("API_TOKEN"))
-  baseURL: str = "v1.formula-1.api-sports.io"
+  if "--help" in sys.argv:
+    """ Help flag """
+    pass
+    sys.exit(0)
 
-  conn: http.client.HTTPSConnection = http.client.HTTPSConnection(baseURL)
+  if "-y" in sys.argv: 
+    """ Year flag, e.g. -y 2023 """
+    pass
 
-  headers = { 'x-apisports-key': api_token }
+  if "-h2h" in sys.argv:
+    """ Head-to-head flag, e.g. -h2h 44 33 """
+    pass
 
-# handle requests of h2h and overviews
+  if "-raceh2h" in sys.argv:
+    """ Race head-to-head flag, e.g. -raceh2h 44 33 2023 Monza"""
+    pass
+
+  # add all possible flags
+
+  
