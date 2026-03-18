@@ -15,6 +15,8 @@ def handleArgs(args: list[str]) -> dict[str, int | bool]:
 
   else:
     settings["isYear"] = False
+    if "--race" in args: # throw error if race is used without year
+      raise ValueError("Race flag can only be used with year flag") # @TODO substitute with custom exception
 
   if "--h2h" in args: # head to head flag; the next argument is the second driver
     settings["h2h"] = True
