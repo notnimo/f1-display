@@ -26,5 +26,5 @@ class InvalidSessionException(InvalidArgumentException):
 class RaceWithoutYearException(GeneralF1DisplayException):
   """"""
   def __init__(self, message: str):
-    foo: str = "" + message # @TODO add std info to message
+    foo: str = "Race flag was detected without year flag in condition: /n" + message # @TODO add std info to message
     super().__init__(foo)
