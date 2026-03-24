@@ -3,6 +3,7 @@
 - driver
 - year (with flag)
 - h2h
+- race
 
 2. manage arguments
 3. fetch data

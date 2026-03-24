@@ -17,9 +17,9 @@ def handleArgs(args: list[str]) -> dict[str, int | bool]:
       settings["isRace"] = False
 
   else:
-    settings["isYear"] = False
     if "--race" in args: # throw error if race is used without year
       raise RaceWithoutYearException("cli call used --race without year flag. arguments: " + " ".join(args))
+    settings["isYear"] = False
 
   if "--h2h" in args: # head to head flag; the next argument is the second driver
     settings["h2h"] = True
