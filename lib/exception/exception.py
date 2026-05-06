@@ -5,26 +5,20 @@ class GeneralF1DisplayException(BaseException):
   
 class InvalidArgumentException(GeneralF1DisplayException):
   def __init__(self, message: str):
-    super().__init__(message)
+    super().__init__("Exception: Invalid Argument.\n  " + message)
 
 class InvalidRaceException(InvalidArgumentException):
   def __init__(self, message: str):
-    super().__init__(message)
+    super().__init__("Exception: Race Selected.\n    " + message)
 
 class InvalidYearException(InvalidArgumentException):
   def __init__(self, message: str):
-    super().__init__(message)
+    super().__init__("Exception: Invalid Year.\n    " + message)
 
 class InvalidDriverIDException(InvalidArgumentException): 
   def __init__(self, message: str):
-    super().__init__(message)
+    super().__init__("Exception: Invalid Driver ID.\n    " +  message)
 
 class InvalidSessionException(InvalidArgumentException):
   def __init__(self, message: str):
-    super().__init__(message)
-
-class RaceWithoutYearException(GeneralF1DisplayException):
-  """"""
-  def __init__(self, message: str):
-    foo: str = "Race flag was detected without year flag in condition: /n" + message # @TODO add std info to message
-    super().__init__(foo)
+    super().__init__("Exception: Invalid Session.\n    " + message)
