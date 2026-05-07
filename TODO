@@ -1,5 +1,8 @@
 - revert to fastf1 API done
-- add exception handling for missing and type error in data
+- exception handling
+- restructure project
+  - copy f1-race-replay done
+  - 
 - class structure to analyze data
-  -
+  - 
 - load data
