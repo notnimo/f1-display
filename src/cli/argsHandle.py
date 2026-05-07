@@ -1,4 +1,4 @@
-from lib.exception.exception import RaceWithoutYearException
+from src.exception.exception import RaceWithoutYearException
 
 
 def handleArgs(args: list[str]) -> dict[str, int | bool]:
