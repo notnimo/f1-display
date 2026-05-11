@@ -1,5 +1,6 @@
 import sys
-from lib.argsHandle import handleArgs
+
+from src.cli.argsHandle import handleArgs
 
 def main(year=None, session=None, ):
   print("session confirm message") # @TODO TO CHANGE
