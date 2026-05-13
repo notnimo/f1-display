@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["dotenv", "fastf", "Monza", "raceh", "Verstappen"]
+	"cSpell.words": ["dotenv", "fastf", "Monza", "raceh", "Verstappen"],
+	"editor.detectIndentation": false
 }

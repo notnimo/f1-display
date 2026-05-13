@@ -2,7 +2,7 @@ import sys
 
 from src.cli.argsHandle import handleArgs
 
-def main(year=None, session=None, ):
+def main(year=None, session=None):
   print("session confirm message") # @TODO TO CHANGE
   # loadWhatever(args)
 
