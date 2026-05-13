@@ -2,7 +2,7 @@ import sys
 
 from src.cli.argsHandle import handleArgs
 
-def main(year=None, session=None):
+def main(driver1, driver2=None, year=None, round_number=None, session_type='R'):
   print("session confirm message") # @TODO TO CHANGE
   # loadWhatever(args)
 
@@ -16,7 +16,8 @@ def main(year=None, session=None):
 if __name__ == "__main__":
 
   if '--help' in sys.argv:
-    print("help message") # @TODO TO CHANGE
+    with open('src/lib/help', 'r') as f:
+      print(f.read())
     sys.exit(0)
 
   settings: dict[str, int | bool] = handleArgs(sys.argv)
