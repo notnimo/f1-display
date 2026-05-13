@@ -65,57 +65,86 @@ def cli_load():
   console = Console()
   console.print(Markdown("# F1 Display CLI"))
 
+  with open('src/cli/driversNum.csv', 'r') as f:
+    driverNum: list[list[str | int]] = [[], []]
+    for line in f:
+      num, name = line.strip().split(',')
+      for i, n in enumerate(num):
+        num[i] = int(n)
+      driverNum[0].append(num)
+      driverNum[1].append(name)
+
+  driverChoices = [Choice(title=driver, value=driverNum[0][i]) for i, driver in enumerate(driverNum[1])]
+
+  #define flag variables
+  driver1: str = None
+  driver2: str = None
+  year: int = None
+  round_number: int = None
+  session: str = None
+
   # choosing first driver
+  driver1 = select("Choose the first driver", choices=driverChoices, qmark="🏎️ ", style=style).ask()
 
   # single or h2h?
 
     # second driver if h2h
 
-  # choosing year
-  years = [str(year) for year in range(current_year, 2009, -1)]
-  year = select("Choose a year", choices=years, qmark="🗓️ ", style=style).ask()
-  if not year:
+  # all time or specific year?
+  all_time = select("All time?", choices=[Choice(title="Yes", value=True), Choice(title="No", value=False)], qmark="⏰ ", style=style).ask()
+  if all_time is None:
     sys.exit(0)
+  elif not all_time:
+    # choosing year
+    years = [str(year) for year in range(current_year, 2009, -1)]
+    year = select("Choose a year", choices=years, qmark="🗓️ ", style=style).ask()
+    if not year:
+      sys.exit(0)
+    else:
+      year = int(year)
+
+    # if round specific, ask round
+    isRoundSpecific = select("Round specific?", choices=[Choice(title="Yes", value=True), Choice(title="No", value=False)], qmark="🏎️ ", style=style).ask()
+    if isRoundSpecific is None:
+      sys.exit(0)
+    elif isRoundSpecific:
+      with Progress(
+        SpinnerColumn(style="bold red"),
+        TextColumn("[bold]Loading races…"),
+        console=console,
+        transient=True,
+      ) as progress:
+        progress.add_task("load", total=None)
+        data = get_race_weekends_by_year(year)
+
+      rounds = [Choice(title=f"{row['event_name']} ({row['date']})",value=row['round_number']) for row in data]
+      round_number = select("Choose a round", choices=rounds, qmark="🌏", style=style).ask()
+      if not round_number:
+        sys.exit(0)
+
+      # ask what to compare (qualifying, sprint qualifying, race, sprint) when round specific
+      sessions = ["Qualifying", "Race"]
+      for row in data:
+        if row['round_number'] == round_number:
+          if row['type'].find('sprint') != -1:
+            sessions.insert(0, "Sprint Qualifying")
+            sessions.insert(1, "Sprint")
+      session = select("Choose a session", choices=sessions, qmark="🏁", style=style).ask()
+      if not session:
+        sys.exit(0)
+    else:
+      # ask what to compare (qualifying, sprint qualifying, race, sprint) when not round specific
+      sessions = ["Qualifying", "Race"]
+      session = select("Choose a session", choices=sessions, qmark="🏁", style=style).ask()
+      if not session:
+        sys.exit(0)
   else:
-    year = int(year)
-
-  # if round specific, ask round
-  isRoundSpecificStr = select("Round specific?", choices=[Choice(title="Yes", value=True), Choice(title="No", value=False)], qmark="🏎️ ", style=style).ask()
-  isRoundSpecific = isRoundSpecificStr == "Yes"
-  if isRoundSpecific is None:
-    sys.exit(0)
-  elif isRoundSpecific:
-    with Progress(
-      SpinnerColumn(style="bold red"),
-      TextColumn("[bold]Loading races…"),
-      console=console,
-      transient=True,
-    ) as progress:
-      progress.add_task("load", total=None)
-      data = get_race_weekends_by_year(year)
-
-    rounds = [Choice(title=f"{row['event_name']} ({row['date']})",value=row['round_number']) for row in data]
-    round_number = select("Choose a round", choices=rounds, qmark="🌏", style=style).ask()
-    if not round_number:
+    # if all time, ask what to compare (qualifying sessions, races)
+    sessions = ["Qualifying", "Race"]
+    session = select("Choose a session", choices=sessions, qmark="🏁", style=style).ask()
+    if not session:
       sys.exit(0)
 
-  sessions = ["Qualifying", "Race"]
-  for row in data:
-    if row['round_number'] == round_number:
-      if row['type'].find('sprint') != -1:
-        sessions.insert(0, "Sprint Qualifying")
-        sessions.insert(1, "Sprint")
-  session = select("Choose a session", choices=sessions, qmark="🏁", style=style).ask()
-  if not session:
-    sys.exit(0)
-      
-  if session in ("Sprint", "Race"):
-    HUD = [Choice(title="Yes", value=True), Choice(title="No", value=False)]
-    hud = select("HUD?", choices=HUD, qmark="🖥️ ", style=style).ask()
-    if hud is None:
-      sys.exit(0)
-  else:
-    hud = True
 
   flag = None
   match session:
@@ -124,17 +153,19 @@ def cli_load():
     case "Sprint Qualifying":
       flag = "--sprint-qualifying"  
     case "Sprint":
-      flag = "--sprint"     
+      flag = "--sprint"
+
+  # build command to run main.py with the selected options     
   main_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', '..', 'main.py'))
-  cmd = [sys.executable, main_path, "--viewer"]
+  cmd = [sys.executable, main_path]
   if year is not None:
     cmd += ["--year", str(year)]
+  else:
+    cmd.append("--all-time")
   if round_number is not None:
     cmd += ["--round", str(round_number)]
   if flag:
     cmd.append(flag)
-  if not hud:
-    cmd.append("--no-hud")
   if "--verbose" in sys.argv:
     cmd.append("--verbose")
   subprocess.run(cmd)
