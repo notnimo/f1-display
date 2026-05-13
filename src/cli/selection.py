@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from questionary import Style, select, Choice
 from rich.console import Console
 from rich.markdown import Markdown
@@ -6,10 +7,11 @@ import sys
 import os
 import subprocess
 import fastf1
+import pandas as pd
 
 def enable_cache():
     # Get cache location from settings
-    cache_path = "/cache"
+    cache_path = "/__pycache__"
 
     # Check if cache folder exists
     if not os.path.exists(cache_path):
@@ -24,7 +26,7 @@ DT = 1 / FPS
 
 def get_race_weekends_by_year(year):
     """Returns a list of race weekends for a given year."""
-    enable_cache()
+    # enable_cache()
     schedule = fastf1.get_event_schedule(year)
     weekends = []
     for _, event in schedule.iterrows():
@@ -51,7 +53,7 @@ def get_race_weekends_by_year(year):
     return weekends
 
 def cli_load():
-    current_year = 2026
+    current_year = datetime.now(timezone.utc).year
 
     style = Style([
         ("pointer", "fg:#e10600 bold"),
@@ -61,8 +63,17 @@ def cli_load():
     ])
 
     console = Console()
-    console.print(Markdown("# F1 Race Replay 🏎️"))
+    console.print(Markdown("# F1 Display CLI"))
 
+    # choosing first driver
+
+    # single or h2h?
+
+        # second driver if h2h
+
+    
+
+    # choosing year  to separate round after asking if its the whole year or a specific round
     years = [str(year) for year in range(current_year, 2009, -1)]
     year = select("Choose a year", choices=years, qmark="🗓️ ", style=style).ask()
     if not year:
