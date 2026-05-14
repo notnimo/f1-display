@@ -20,5 +20,5 @@ if __name__ == "__main__":
       print(f.read())
     sys.exit(0)
 
-  settings: dict[str, int | bool] = handleArgs(sys.argv)
+  settings: dict[str, int | bool] = handleArgs(args=sys.argv)
   print(settings)

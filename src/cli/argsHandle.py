@@ -2,6 +2,11 @@ from src.exception.exception import InvalidArgumentException
 
 
 def handleArgs(args: list[str]) -> dict[str, int | bool]:
+  """Handles the command line arguments for the F1 Display CLI.
+  Args:
+    args: A list of command line arguments.
+  Returns:
+    A dictionary of settings to be used in the main function."""
   settings: dict[str, int | bool] = {}
 
   settings["driver1"] = args[1] # first argument is the first driver to load

@@ -24,7 +24,7 @@ def enable_cache():
 FPS = 25
 DT = 1 / FPS
 
-def get_race_weekends_by_year(year):
+def get_race_weekends_by_year(year: int) -> list[dict[str, str | int | dict[str, str]]]:
   """Returns a list of race weekends for a given year."""
   enable_cache()
   schedule = fastf1.get_event_schedule(year)
@@ -52,7 +52,7 @@ def get_race_weekends_by_year(year):
     )
   return weekends
 
-def cli_load():
+def cli_load() -> None:
   current_year = datetime.now(timezone.utc).year
 
   style = Style([
@@ -67,6 +67,7 @@ def cli_load():
 
   with open('src/cli/driversNum.csv', 'r') as f:
     driverNum: list[list[str | int]] = [[], []]
+    print(list(f))
     for line in f:
       num, name = line.strip().split(',')
       for i, n in enumerate(num):
@@ -155,9 +156,10 @@ def cli_load():
     case "Sprint":
       flag = "--sprint"
 
-  # build command to run main.py with the selected options     
+  # build command to run main.py with the selected options
   main_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', '..', 'main.py'))
   cmd = [sys.executable, main_path]
+
   if year is not None:
     cmd += ["--year", str(year)]
   else:
