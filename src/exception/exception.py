@@ -5,20 +5,20 @@ class GeneralF1DisplayException(BaseException):
   
 class InvalidArgumentException(GeneralF1DisplayException):
   def __init__(self, message: str):
-    super().__init__("Exception: Invalid Argument.\n  " + message)
+    super().__init__("Exception: Invalid Argument.\t" + message)
 
 class InvalidRaceException(InvalidArgumentException):
   def __init__(self, message: str):
-    super().__init__("Exception: Race Selected.\n    " + message)
+    super().__init__("Exception: Race Selected.\t" + message)
 
 class InvalidYearException(InvalidArgumentException):
   def __init__(self, message: str):
-    super().__init__("Exception: Invalid Year.\n    " + message)
+    super().__init__("Exception: Invalid Year.\t" + message)
 
 class InvalidDriverIDException(InvalidArgumentException): 
   def __init__(self, message: str):
-    super().__init__("Exception: Invalid Driver ID.\n    " +  message)
+    super().__init__("Exception: Invalid Driver ID.\t" +  message)
 
 class InvalidSessionException(InvalidArgumentException):
   def __init__(self, message: str):
-    super().__init__("Exception: Invalid Session.\n    " + message)
+    super().__init__("Exception: Invalid Session.\t" + message)

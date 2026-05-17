@@ -6,7 +6,14 @@ def handleArgs(args: list[str]) -> dict[str, int | bool]:
   Args:
     args: A list of command line arguments.
   Returns:
-    A dictionary of settings to be used in the main function."""
+    A dictionary of settings to be used in the main function.
+  raises:
+    InvalidArgumentException: If any argument is invalid
+    InvalidArgumentException: If the arg list is invalid"""
+  
+  if len(args) < 2:
+    raise InvalidArgumentException("cli call must include at least one driver\targs:" + str(args))
+
   settings: dict[str, int | bool] = {}
 
   settings["driver1"] = args[1] # first argument is the first driver to load
