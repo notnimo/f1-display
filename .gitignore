@@ -1,6 +1,11 @@
 .env
+
 /test/
+
 __pycache__/
+
 /docs/*
 !docs/docs.tex
 !docs/docs.pdf
+
+/.vscode/
