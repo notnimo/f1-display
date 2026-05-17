@@ -9,6 +9,11 @@ import subprocess
 import fastf1
 import pandas as pd
 
+from src.const.driversList import getDriversList
+
+driverList: list = sorted(getDriversList()) # @TODO control that it really has all the drivers
+
+
 def enable_cache():
   # Get cache location from settings
   cache_path = "/__pycache__"
@@ -65,17 +70,6 @@ def cli_load() -> None:
   console = Console()
   console.print(Markdown("# F1 Display CLI"))
 
-  with open('src/cli/driversNum.csv', 'r') as f:
-    driverNum: list[list[str | int]] = [[], []]
-    print(list(f))
-    for line in f:
-      num, name = line.strip().split(',')
-      for i, n in enumerate(num):
-        num[i] = int(n)
-      driverNum[0].append(num)
-      driverNum[1].append(name)
-
-  driverChoices = [Choice(title=driver, value=driverNum[0][i]) for i, driver in enumerate(driverNum[1])]
 
   #define flag variables
   driver1: str = None
@@ -85,6 +79,7 @@ def cli_load() -> None:
   session: str = None
 
   # choosing first driver
+  driverChoices = [Choice(title=driver, value=driverList.index(driver)) for driver in driverList]
   driver1 = select("Choose the first driver", choices=driverChoices, qmark="🏎️ ", style=style).ask()
 
   # single or h2h?
