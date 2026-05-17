@@ -1,6 +1,7 @@
 import sys
 
 from src.cli.argsHandle import handleArgs
+from src.cli.selection import cli_load
 
 def main(driver1, driver2=None, year=None, round_number=None, session_type='R'):
   print("session confirm message") # @TODO TO CHANGE
@@ -21,4 +22,5 @@ if __name__ == "__main__":
     sys.exit(0)
 
   settings: dict[str, int | bool] = handleArgs(args=sys.argv)
-  print(settings)
+
+  main(driver1=settings['driver1'], driver2=settings['driver2'], year=settings['year'], round_number=settings['round_number'], session_type=settings['session_type'])
