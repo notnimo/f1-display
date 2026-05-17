@@ -13,7 +13,6 @@ from src.const.driversList import getDriversList
 
 driverList: list = sorted(getDriversList()) # @TODO control that it really has all the drivers
 
-
 def enable_cache():
   # Get cache location from settings
   cache_path = "/__pycache__"
@@ -24,10 +23,6 @@ def enable_cache():
 
   # Enable local cache
   fastf1.Cache.enable_cache(cache_path)
-
-
-FPS = 25
-DT = 1 / FPS
 
 def get_race_weekends_by_year(year: int) -> list[dict[str, str | int | dict[str, str]]]:
   """Returns a list of race weekends for a given year."""
@@ -74,6 +69,7 @@ def cli_load() -> None:
   #define flag variables
   driver1: str = None
   driver2: str = None
+  h2h: bool = None
   year: int = None
   round_number: int = None
   session: str = None
@@ -81,10 +77,15 @@ def cli_load() -> None:
   # choosing first driver
   driverChoices = [Choice(title=driver, value=driverList.index(driver)) for driver in driverList]
   driver1 = select("Choose the first driver", choices=driverChoices, qmark="🏎️ ", style=style).ask()
+  driverChoices.pop(driver1)
 
   # single or h2h?
-
-    # second driver if h2h
+  h2h = select("Head to head comparison?", choices=[Choice(title="Yes", value=True), Choice(title="No", value=False)], qmark="⚔️ ", style=style).ask()
+  if h2h is None:
+    sys.exit(0)
+  elif h2h:
+    # choosing second driver if h2h
+    driver2 = select("Choose the second driver", choices=driverChoices, qmark="🏎️ ", style=style).ask()
 
   # all time or specific year?
   all_time = select("All time?", choices=[Choice(title="Yes", value=True), Choice(title="No", value=False)], qmark="⏰ ", style=style).ask()
@@ -142,29 +143,32 @@ def cli_load() -> None:
       sys.exit(0)
 
 
-  flag = None
+  sessionFlag = None
   match session:
     case "Qualifying":
-      flag = "--qualifying" 
+      sessionFlag = "--qualifying" 
     case "Sprint Qualifying":
-      flag = "--sprint-qualifying"  
+      sessionFlag = "--sprint-qualifying"  
     case "Sprint":
-      flag = "--sprint"
+      sessionFlag = "--sprint"
 
   # build command to run main.py with the selected options
   main_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', '..', 'main.py'))
   cmd = [sys.executable, main_path]
 
+  cmd += ["--driver1", str(driver1)]
+  if driver2 is not None:
+    cmd += ["--driver2", str(driver2)]
+
   if year is not None:
     cmd += ["--year", str(year)]
+    if round_number is not None:
+      cmd += ["--round", str(round_number)]
   else:
     cmd.append("--all-time")
-  if round_number is not None:
-    cmd += ["--round", str(round_number)]
-  if flag:
-    cmd.append(flag)
-  if "--verbose" in sys.argv:
-    cmd.append("--verbose")
+  if sessionFlag:
+    cmd.append(sessionFlag)
+
   subprocess.run(cmd)
 
 if __name__ == "__main__":
