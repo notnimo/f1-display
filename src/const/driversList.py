@@ -2,3 +2,9 @@ drivers = ['Charles Leclerc', 'Sebastian Vettel', 'Lewis Hamilton', 'Jenson Butt
 
 def getDriversList() -> list[str]:
   return drivers
+
+def getDriverWithId(id: int) -> str:
+  return drivers[id]
+
+def getIdOfDriver(driver: str) -> int:
+  return drivers.index(driver)
