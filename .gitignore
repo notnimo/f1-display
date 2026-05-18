@@ -1,12 +1,21 @@
 .env
 
+# testing files
 /test/
 test.py
 
+# cache files
 __pycache__/
 
+# ignore build LaTeX files
 /docs/*
 !docs/docs.tex
 !docs/docs.pdf
 
+# VSCode settings
 /.vscode/
+
+# files to ignore temporarily
+src/lib/f1_data.py
+src/lib/settings.py
+src/exception/exception
