@@ -130,7 +130,7 @@ def cli_load() -> None:
       if not session:
         sys.exit(0)
     else:
-      # ask what to compare (qualifying, sprint qualifying, race, sprint) when not round specific
+      # ask what to compare (qualifying, race) when not round specific
       sessions = ["Qualifying", "Race"]
       session = select("Choose a session", choices=sessions, qmark="🏁", style=style).ask()
       if not session:
@@ -146,11 +146,13 @@ def cli_load() -> None:
   sessionFlag = None
   match session:
     case "Qualifying":
-      sessionFlag = "--qualifying" 
+      sessionFlag = "Q" 
     case "Sprint Qualifying":
-      sessionFlag = "--sprint-qualifying"  
+      sessionFlag = "SQ"  
     case "Sprint":
-      sessionFlag = "--sprint"
+      sessionFlag = "S"
+    case "Race":
+      sessionFlag = "R"
 
   # build command to run main.py with the selected options
   main_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', '..', 'main.py'))
@@ -168,6 +170,9 @@ def cli_load() -> None:
     cmd.append("--all-time")
   if sessionFlag:
     cmd.append(sessionFlag)
+
+  if sessionFlag:
+    cmd += ["--session", sessionFlag]
 
   subprocess.run(cmd)
 
