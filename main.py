@@ -1,7 +1,6 @@
 import sys
 
 from src.cli.argsHandle import handleArgs
-from src.cli.selection import cli_load
 
 def main(driver1, driver2=None, year=None, round_number=None, session_type='R'):
   print("session confirm message") # @TODO TO CHANGE
