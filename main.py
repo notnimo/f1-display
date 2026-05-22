@@ -6,9 +6,9 @@ def main(driver1, driver2=-1, year=-1, round_number=-1, session_type='R'):
   print("session confirm message") # @TODO TO CHANGE
   # validate args
 
-  # loadWhatever(args)
-
   # enable cache
+
+  # loadWhatever(args)
 
   # manipulate data
 
