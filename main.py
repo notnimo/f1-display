@@ -14,7 +14,7 @@ def main(driver1, driver2=-1, year=-1, round_number=-1, session_type='R'):
     session_type = 'R'
   driver1_name = getDriverWithId(int(driver1))
   driver2_name = getDriverWithId(int(driver2)) if driver2 != -1 else None
-  print(f"session confirmed for {driver1_name} {f'and {driver2_name}' if driver2_name else '\0'}{f' in ' if year != -1 or round_number != -1 else '\0'}{f'{year}' if year != -1 else '\0'}{f' round {round_number}' if round_number != -1 else '\0'}({session_type})") # @TODO TO CHANGE
+  print(f"session confirmed for {driver1_name} {f'and {driver2_name}' if driver2_name else '\0'}{f' in ' if year != -1 or round_number != -1 else '\0'}{f'{year}' if year != -1 else '\0'}{f' round {round_number}' if round_number != -1 else '\0'}({session_type})")
   # validate args
 
   # enable cache

@@ -5,7 +5,7 @@ class GeneralF1DisplayException(BaseException):
   
 class InvalidArgumentException(GeneralF1DisplayException):
   def __init__(self, message: str):
-    super().__init__("Exception: Invalid Argument.\t" + message)
+    super().__init__("Exception: Invalid Argument.\t" + message + "\nsee --help flag to mode of use")
 
 class InvalidRaceException(InvalidArgumentException):
   def __init__(self, message: str):
