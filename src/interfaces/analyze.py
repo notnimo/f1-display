@@ -10,4 +10,3 @@ class AnalyzeSession:
 
   def load(self):
     pass
-

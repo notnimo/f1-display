@@ -7,7 +7,7 @@ def validateArgs(**args) -> bool:
   if not args["driver1"]:
     raise InvalidArgumentException("driver 1 is required")
   if not args["driver1"] >= 0 and not args["driver1"] < len(getDriversList()):
-      raise InvalidDriverIDException("driver 1 is provided but inexistent")
+    raise InvalidDriverIDException("driver 1 is provided but inexistent")
   
   # check driver 1 with other args (was it on the grid if year is specified)
 
