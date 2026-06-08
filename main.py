@@ -1,7 +1,10 @@
 import sys
 
 from src.cli.argsHandle import handleArgs
+
 from src.const.driversList import getDriverWithId
+
+from src.lib.validateArgs import validateArgs
 
 def main(driver1, driver2=-1, year=-1, round_number=-1, session_type='R'):
   if driver2 == None:
@@ -15,7 +18,10 @@ def main(driver1, driver2=-1, year=-1, round_number=-1, session_type='R'):
   driver1_name = getDriverWithId(int(driver1))
   driver2_name = getDriverWithId(int(driver2)) if driver2 != -1 else None
   print(f"session confirmed for {driver1_name} {f'and {driver2_name}' if driver2_name else '\0'}{f' in ' if year != -1 or round_number != -1 else '\0'}{f'{year}' if year != -1 else '\0'}{f' round {round_number}' if round_number != -1 else '\0'}({session_type})")
-  # validate args
+  
+  validateArgs(driver1=driver1, driver2=driver2, year=year, round=round_number, session_type=session_type)
+
+  print("provided arguments are valid, proceeding with data loading")
 
   # enable cache
 
