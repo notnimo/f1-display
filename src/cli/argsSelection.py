@@ -158,7 +158,7 @@ def cli_load() -> None:
   main_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', '..', 'main.py'))
   cmd = [sys.executable, main_path]
 
-  cmd += ["--driver1", str(driver1)]
+  cmd += [str(driver1)]
   if driver2 is not None:
     cmd += ["--driver2", str(driver2)]
 

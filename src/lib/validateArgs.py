@@ -1,7 +1,16 @@
 import fastf1
+import logging
+import warnings
 
 from src.const.driversList import getDriverWithId, getDriversList
-from src.exception.exception import InvalidArgumentException, InvalidDriverIDException, InvalidYearException
+from src.exception.exception import InvalidArgumentException, InvalidDriverIDException, InvalidYearException, InvalidSessionException
+
+# Silence FastF1 and related noisy libraries during argument validation.
+# This keeps CLI output clean while we query schedules/sessions.
+logging.getLogger("fastf1").setLevel(logging.CRITICAL)
+logging.getLogger("urllib3").setLevel(logging.CRITICAL)
+logging.getLogger("requests").setLevel(logging.CRITICAL)
+warnings.filterwarnings("ignore")
 
 
 def _parse_driver_index(driver, label: str) -> int:
@@ -78,10 +87,15 @@ def validateArgs(**args) -> bool:
       raise InvalidArgumentException("driver 2 and driver 1 have the same value")
     driver2_name = getDriverWithId(driver2_index)
 
-  # Parse year/round/session arguments for session validation.
+  # Parse year/round arguments for session validation.
   year = _parse_optional_int(args.get("year"), "year")
   round_number = _parse_optional_int(args.get("round"), "round")
-  session_type = str(args.get("session_type") or "R").upper()
+
+  # Require explicit session type and normalize to upper case.
+  session_type = args.get("session_type")
+  if session_type is None or session_type == "":
+    raise InvalidSessionException("session_type is required")
+  session_type = str(session_type).upper()
 
   # If a year is provided, verify driver participation either by session or by season.
   if year is not None:

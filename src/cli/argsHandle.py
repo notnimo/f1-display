@@ -15,7 +15,7 @@ def handleArgs(args: list[str]) -> dict[str, int | bool]:
 
   settings: dict[str, int | bool] = {}
 
-  settings["driver1"] = args[2] # first argument is the first driver to load
+  settings["driver1"] = args[1] # first argument is the first driver to load
 
   if "--year" in args: # year flag; next argument is the year to load
     settings["year"] = args[args.index("--year") + 1]
