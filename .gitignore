@@ -1,9 +1,5 @@
 .env
 
-# testing files
-/test/
-test.py
-
 # cache files
 __pycache__/
 
@@ -15,7 +11,5 @@ __pycache__/
 # VSCode settings
 /.vscode/
 
-# files to ignore temporarily
-src/lib/f1_data.py
-src/lib/settings.py
-src/exception/exception.cpp
+# restructure temp files
+**/rtemp/
