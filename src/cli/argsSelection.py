@@ -5,13 +5,13 @@ from rich.markdown import Markdown
 from rich.progress import Progress, SpinnerColumn, TextColumn
 import sys
 import os
-import subprocess
 import fastf1
 import pandas as pd
 
 from src.const.driversList import getDriversList
+from main import main
 
-driverList: list = sorted(getDriversList()) # @TODO control that it really has all the drivers
+driverList: list = getDriversList()
 
 def enable_cache():
   # Get cache location from settings
@@ -154,27 +154,14 @@ def cli_load() -> None:
     case "Race":
       sessionFlag = "R"
 
-  # build command to run main.py with the selected options
-  main_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', '..', 'main.py'))
-  cmd = [sys.executable, main_path]
-
-  cmd += [str(driver1)]
-  if driver2 is not None:
-    cmd += ["--driver2", str(driver2)]
-
-  if year is not None:
-    cmd += ["--year", str(year)]
-    if round_number is not None:
-      cmd += ["--round", str(round_number)]
-  else:
-    cmd.append("--all-time")
-  if sessionFlag:
-    cmd.append(sessionFlag)
-
-  if sessionFlag:
-    cmd += ["--session", sessionFlag]
-
-  subprocess.run(cmd)
+  # call main function with the selected parameters
+  main(
+    driver1=driverList[driver1],
+    driver2=driverList[driver2] if h2h else None,
+    year=year,
+    round_number=round_number,
+    session=sessionFlag
+  )
 
 if __name__ == "__main__":
   cli_load()

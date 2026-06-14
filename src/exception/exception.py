@@ -4,7 +4,7 @@ import traceback
 
 def _format_message(message: str) -> str:
   # Replace tab separators with aligned new lines for CLI output.
-  return message.replace("\t", "\n    ")
+  return message.replace("\t", "\n\t")
 
 
 def _deepest_exception(exc: BaseException) -> BaseException:
