@@ -18,4 +18,4 @@ __pycache__/
 # files to ignore temporarily
 src/lib/f1_data.py
 src/lib/settings.py
-src/exception/exception
+src/exception/exception.cpp
