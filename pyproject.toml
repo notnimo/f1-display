@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=70", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "f1-display"
+version = "0.0.1"
+description = "F1 driver performance analyzer and head-to-head comparison tool"
+authors = [{ name = "Livoni Damiano" }]
+readme = "README.md"
+requires-python = ">=3.11" # 3.11+ for tomllib; 3.12 for types and fstrings
+
+dependencies = [
+  # F1 data source
+  "fastf1>=3.4",
+
+  # TUI selector
+  "questionary>=2.0",
+
+  # terminal output (tables, markdown, progress spinners)
+  "rich>=13.0",
+
+  # data wrangling (schedule parsing, telemetry frames)
+  "pandas>=2.0",
+
+  # fastf1 pulls these in but pin them explicitly so the env is reproducible
+  "numpy>=1.26",
+  "requests>=2.31",
+  "urllib3>=2.0",
+
+  # plotting
+  "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "pytest-cov>=5.0",
+  "ruff>=0.4",        # linter + formatter
+  "mypy>=1.10",
+  "pandas-stubs>=2.0",
+]
+
+[project.scripts]
+f1display = "src.cli.entryPoint:entrypoint"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+# ── Ruff (lint + format) ────────────────────────────────────────────────────
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP"]
+ignore = ["E501"] # line length handled by formatter
+
+# ── Mypy ────────────────────────────────────────────────────────────────────
+[tool.mypy]
+python_version = "3.11"
+strict = false
+ignore_missing_imports = true # fastf1 ships no stubs
+
+# ── Pytest ──────────────────────────────────────────────────────────────────
+[tool.pytest.ini_options]
+testpaths = ["test"]
+addopts   = "-v --tb=short"
