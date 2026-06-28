@@ -37,3 +37,13 @@ class Warning(BaseError):
   @abstractmethod
   def getLogLevel(self) -> LogLevel:
     pass
+
+
+class Debug(BaseError):
+  @staticmethod
+  def level():
+    return ErrorLevel.DEBUG
+
+  @abstractmethod
+  def getLogLevel(self) -> LogLevel:
+    pass
