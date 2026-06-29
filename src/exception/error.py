@@ -13,19 +13,31 @@ class GenericError(ABC):
 
 
 class BaseError(GenericError):
-  def __init__(self, msg: str):
-    self._msg = msg
+  @abstractmethod
+  def getS() -> str:
+    pass
+
+  @abstractmethod
+  def compose(self) -> str:
+    pass
 
   def msg(self) -> str:
-    return self._msg
+    return self.compose()
+  
+  @abstractmethod
+  def level() -> ErrorLevel:
+    pass
 
+  @abstractmethod
+  def getLogLevel(self) -> LogLevel:
+    pass
+  
 
 class Error(BaseError):
   @staticmethod
   def level():
     return ErrorLevel.ERROR
 
-  @abstractmethod
   def getLogLevel(self) -> LogLevel:
     pass
 
@@ -34,7 +46,6 @@ class Warning(BaseError):
   def level():
     return ErrorLevel.WARNING
 
-  @abstractmethod
   def getLogLevel(self) -> LogLevel:
     pass
 
@@ -44,6 +55,5 @@ class Debug(BaseError):
   def level():
     return ErrorLevel.DEBUG
 
-  @abstractmethod
   def getLogLevel(self) -> LogLevel:
     pass
