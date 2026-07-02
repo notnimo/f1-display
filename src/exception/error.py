@@ -60,26 +60,7 @@ class DebugError(GenericError):
     return ErrorLevel.DEBUG
 
 
-class InvalidArgumentError(Error):
-  template = "Invalid argument: {0}"
-
-
-class InvalidYearError(Error):
-  template = "Invalid year: {0}"
-
-
-class InvalidDriverIDError(Error):
-  template = "Invalid driver id: {0}"
-
-
-class InvalidSessionError(Error):
-  template = "Invalid session: {0}"
-
-
 # Compatibility aliases for the rest of the package.
 GeneralF1DisplayException = GenericError
 WarningException = Warning
-InvalidArgumentException = InvalidArgumentError
-InvalidYearException = InvalidYearError
-InvalidDriverIDException = InvalidDriverIDError
-InvalidSessionException = InvalidSessionError
+DebugMessage = DebugError

@@ -2,10 +2,6 @@ import sys
 
 from src.exception.error import (
   GeneralF1DisplayException,
-  InvalidArgumentException,
-  InvalidDriverIDException,
-  InvalidSessionException,
-  InvalidYearException,
   WarningException,
 )
 from src.exception.functions import break_on_throw, expect, force_throw, set_log_level, throw_error
@@ -27,10 +23,6 @@ sys.excepthook = _fatal_excepthook
 __all__ = [
   "GeneralF1DisplayException",
   "WarningException",
-  "InvalidArgumentException",
-  "InvalidYearException",
-  "InvalidDriverIDException",
-  "InvalidSessionException",
   "error_register",
   "throw_error",
   "force_throw",

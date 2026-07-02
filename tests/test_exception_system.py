@@ -1,11 +1,14 @@
 import pytest
 
 from src.exception import error_register, expect, throw_error
-from src.exception.error import DebugError, Error, InvalidArgumentException, WarningException
+from src.exception.error import DebugError, Error, WarningException
 
 
 class CustomTemplateError(Error):
     template = "{0} is invalid for {1}"
+
+class InvalidArgumentException(Error):
+    template = "Invalid argument: {0}"
 
 
 def test_throw_error_records_and_retrieves_errors():
@@ -39,3 +42,8 @@ def test_messages_are_colored_by_severity():
     assert error.msg().startswith("\033[31m") and error.msg().endswith("\033[0m")
     assert warning.msg().startswith("\033[33m") and warning.msg().endswith("\033[0m")
     assert debug.msg() == "trace"
+
+
+def test2():
+    error = InvalidArgumentException("bad input")
+    throw_error(error)
