@@ -26,7 +26,7 @@ class ErrorRegister:
     self._to_handle.append(error)
 
     if settings.log_level == LogLevel.FULL:
-      debug.log(f"{error.__class__.__name__}: {error.msg()}")
+      debug.log(f"{error.msg()}")
     elif settings.log_level == LogLevel.SHORT:
       debug.log(error.__class__.__name__, LogLevel.SHORT)
 

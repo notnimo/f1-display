@@ -1,7 +1,7 @@
 import pytest
 
 from src.exception import error_register, expect, throw_error
-from src.exception.error import DebugMessage, Error, WarningException
+from src.exception.error import DebugMessage, Error, Warning
 
 
 class CustomTemplateError(Error):
@@ -10,7 +10,7 @@ class CustomTemplateError(Error):
 class InvalidArgumentException(Error):
     template = "Invalid argument: {0}"
 
-class LogFiles(DebugMessage):
+class LogFiles(Warning):
     template = "Log files: {0}"
 
 

@@ -1,6 +1,7 @@
 import sys
 
 from src.exception.error import (
+  DebugMessage,
   GeneralF1DisplayException,
   WarningException,
 )
@@ -23,6 +24,7 @@ sys.excepthook = _fatal_excepthook
 __all__ = [
   "GeneralF1DisplayException",
   "WarningException",
+  "DebugMessage",
   "error_register",
   "throw_error",
   "force_throw",
