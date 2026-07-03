@@ -11,5 +11,5 @@ __pycache__/
 # VSCode settings
 /.vscode/
 
-# restructure temp files
-**/rtemp/
+# test
+test.py
