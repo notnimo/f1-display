@@ -1,4 +1,3 @@
-# __main__.py
 def main():
   args = cli.parse_args()
   if args.has_explicit_target():

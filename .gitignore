@@ -1,0 +1,15 @@
+# caches
+fastf1cache/
+pycache/
+
+# .env files
+*.env
+
+#vscode settings
+.vscode/
+
+#python virtual environments
+venv/
+
+#test python file
+test.py
