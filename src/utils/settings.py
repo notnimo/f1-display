@@ -1,11 +1,3 @@
-""""""
-
-#--------------------------------------------------------------------------
-
-
-
-#--------------------------------------------------------------------------
-
 import json
 import os
 from pathlib import Path
@@ -49,9 +41,9 @@ class SettingsManager:
         # Use user's home directory for settings
         if os.name == "nt":  # Windows
             app_data = os.environ.get("APPDATA", os.path.expanduser("~"))
-            settings_dir = Path(app_data) / "F1RaceReplay"
+            settings_dir = Path(app_data) / "F1Display"
         else:  # macOS/Linux
-            settings_dir = Path.home() / ".config" / "f1-race-replay"
+            settings_dir = Path.home() / ".config" / "f1-display"
 
         settings_dir.mkdir(parents=True, exist_ok=True)
         return settings_dir / "settings.json"
@@ -130,15 +122,3 @@ class SettingsManager:
 def get_settings() -> SettingsManager:
     """Get the global settings manager instance."""
     return SettingsManager()
-
-def enable_cache():
-    # Get cache location from settings
-    settings = get_settings()
-    cache_path = settings.cache_location
-
-    # Check if cache folder exists
-    if not os.path.exists(cache_path):
-        os.makedirs(cache_path)
-
-    # Enable local cache
-    fastf1.Cache.enable_cache(cache_path)
