@@ -1,9 +1,9 @@
+"""Utility module for managing application settings with JSON file persistence."""
+
 import json
 import os
 from pathlib import Path
 from typing import Any, Optional
-import fastf1
-
 
 class SettingsManager:
     """Manages application settings with JSON file persistence."""

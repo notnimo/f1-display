@@ -52,7 +52,7 @@ include = ["src*"]
 [tool.mypy]
 python_version = "3.11"
 strict = false
-ignore_missing_imports = true # fastf1 ships no stubs
+ignore_missing_imports = true
 
 # ── Pytest ──────────────────────────────────────────────────────────────────
 [tool.pytest.ini_options]

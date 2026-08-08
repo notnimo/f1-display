@@ -1,5 +1,5 @@
 # caches
-fastf1cache/
+/.fastf1cache/
 pycache/
 
 # .env files
@@ -8,8 +8,12 @@ pycache/
 #vscode settings
 .vscode/
 
+# --------------------------------------
+#cose python
 #python virtual environments
 venv/
+#python cache
+__pycache__/
 
 #test python file
 test.py
