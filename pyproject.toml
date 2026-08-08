@@ -42,7 +42,7 @@ dev = [
 ]
 
 [project.scripts]
-# @TODO write here
+f1display = "src.__main__:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
