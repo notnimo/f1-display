@@ -56,5 +56,6 @@ ignore_missing_imports = true
 
 # ── Pytest ──────────────────────────────────────────────────────────────────
 [tool.pytest.ini_options]
-testpaths = ["src/test"]
+testpaths = ["src/tests"]
 addopts   = "-v --tb=short"
+pythonpath = "."
