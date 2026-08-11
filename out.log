@@ -1,0 +1,46 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-8.4.2, pluggy-1.6.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/notnimo/Desktop/f1-display
+configfile: pyproject.toml
+plugins: anyio-3.7.1
+collecting ... ============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-8.4.2, pluggy-1.6.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/notnimo/Desktop/f1-display
+configfile: pyproject.toml
+plugins: anyio-3.7.1
+collecting ... collected 0 items / 1 error
+
+==================================== ERRORS ====================================
+____________________ ERROR collecting tests/test_logging.py ____________________
+ImportError while importing test module '/home/notnimo/Desktop/f1-display/tests/test_logging.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib64/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_logging.py:1: in <module>
+    from src.utils.exception import Exception, debug
+E   ModuleNotFoundError: No module named 'src'
+=========================== short test summary info ============================
+ERROR tests/test_logging.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+=============================== 1 error in 0.21s ===============================
+collected 0 items / 1 error
+
+==================================== ERRORS ====================================
+____________________ ERROR collecting tests/test_logging.py ____________________
+ImportError while importing test module '/home/notnimo/Desktop/f1-display/tests/test_logging.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib64/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_logging.py:1: in <module>
+    from src.utils.exception import Exception, debug
+E   ModuleNotFoundError: No module named 'src'
+=========================== short test summary info ============================
+ERROR tests/test_logging.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+=============================== 1 error in 0.21s ===============================

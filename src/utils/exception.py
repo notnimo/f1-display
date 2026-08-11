@@ -32,6 +32,6 @@ class Logger:
                 print(f"[{self.name}]: ERROR: {error.message}")
             case ExceptionLevel.TERMINATE:
                 print(f"[{self.name}]: TERMINATE: {error.message}")
-                exit(1)
+#                exit(1)
 
 debug: Logger = Logger("F1-disp-logger")

@@ -9,11 +9,12 @@ pycache/
 .vscode/
 
 # --------------------------------------
-#cose python
+#python
 #python virtual environments
 venv/
 #python cache
 __pycache__/
 
-#test python file
+#test file/folders
 test.py
+.pytest_cache/

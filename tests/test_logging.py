@@ -17,7 +17,7 @@ def test_logging():
 
     print("terminate test")
     terminate: Exception = Exception("this is a terminate message", level=debug.level.TERMINATE)
-#   debug.log(terminate)
+#    debug.log(terminate)
 
 if __name__ == "__main__":
     test_logging()
