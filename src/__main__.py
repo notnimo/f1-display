@@ -1,8 +1,18 @@
+import sys
+
+from src.cli import isTuiNecessary
+
 def main():
+# format args
+  args: list = sys.argv # get args
+  args.pop(0) # delete script name from args
+
+  args_dict: dict = formatArgs(args) # format args into dict
+
 # launch the TUI interface or launch the session if flags are provided
 # cli.request(driver, session, year, week, mode, output, export) so that even if its only missing one arg i can still launch tui
-
-# format args
+  if isTuiNecessary(args)[0]:
+    pass
 
 # validate args
 
