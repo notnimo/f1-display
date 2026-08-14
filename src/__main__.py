@@ -1,6 +1,7 @@
 import sys
 
 from src.cli import isTuiNecessary
+from src.utils.format_args import formatArgs
 
 def main():
 # format args
@@ -11,7 +12,7 @@ def main():
 
 # launch the TUI interface or launch the session if flags are provided
 # cli.request(driver, session, year, week, mode, output, export) so that even if its only missing one arg i can still launch tui
-  if isTuiNecessary(args)[0]:
+  if isTuiNecessary(args_dict)[0]:
     pass
 
 # validate args
