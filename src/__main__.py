@@ -8,12 +8,11 @@ def main():
   args: list = sys.argv # get args
   args.pop(0) # delete script name from args
 
-  args_dict: dict = formatArgs(args) # format args into dict
-
-# launch the TUI interface or launch the session if flags are provided
-# cli.request(driver, session, year, week, mode, output, export) so that even if its only missing one arg i can still launch tui
-  if isTuiNecessary(args_dict)[0]:
+  if len(args) == 0:
+    # launch full tui selector
     pass
+
+  args_dict: dict = formatArgs(args) # format args into dict
 
 # validate args
 
