@@ -1,10 +1,10 @@
 import sys
 
-from src.cli.argsHandle import handleArgs
+from cli.rtemp.argsHandle import handleArgs
 
-from src.const.driversList import getDriverWithId
+from const.rtemp.driversList import getDriverWithId
 
-from src.lib.validateArgs import validateArgs
+from lib.rtemp.validateArgs import validateArgs
 
 def main(driver1=None, driver2=None, year=None, round_number=None, session_type=None):
   validateArgs(driver1=driver1, driver2=driver2, year=year, round=round_number, session_type=session_type)
